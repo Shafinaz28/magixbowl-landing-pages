@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- ✅ SweetAlert2 Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 
 <body>
     <!-- Header -->
@@ -56,14 +59,14 @@
                         <h3>Get Free Consultation</h3>
                         <p>Start your digital transformation today!</p>
                     </div>
-                    <form class="hero-form" id="contactForm">
+                    <form class="hero-" id="contactForm">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Your Name *" required>
                             <i class="fas fa-user form-icon"></i>
                         </div>
 
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Email ID *" required>
+                            <input formtype="email" name="email" placeholder="Email ID *" required>
                             <i class="fas fa-envelope form-icon"></i>
                         </div>
 
@@ -262,6 +265,37 @@
     </a>
 
     <script src="script.js"></script>
+
+ <script>
+        // Google Apps Script Web App URL
+        const scriptURL = "https://script.google.com/macros/s/AKfycbydiv3sy5mNHaclC7Pa3Qtm_mgkCgO59EZldOGsuLxU1TQkh-HS7QQfF_HXyajYg71uUw/exec";
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch(scriptURL, { method: "POST", body: formData })
+                .then(() => {
+                    Swal.fire({
+                        title: "✅ Success!",
+                        text: "Your consultation request has been submitted.",
+                        icon: "success",
+                        confirmButtonColor: "#4CAF50"
+                    });
+                    form.reset();
+                })
+                .catch(() => {
+                    Swal.fire({
+                        title: "❌ Error",
+                        text: "Something went wrong. Please try again!",
+                        icon: "error",
+                        confirmButtonColor: "#d33"
+                    });
+                });
+        });
+    </script>
 </body>
 
 </html>
